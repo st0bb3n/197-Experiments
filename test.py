@@ -91,7 +91,7 @@ class Drinks(datasets.VisionDataset):
     def __len__(self):
         return len(self.ids)
   
-dataset_path = "/content/drive/MyDrive/drinkscoco"
+dataset_path = "/drinkscoco"
 coco = COCO(os.path.join(dataset_path, "train", "_annotations.coco.json"))
 categories = coco.cats
 n_classes = len(categories.keys())
