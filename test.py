@@ -14,7 +14,6 @@ from PIL import Image
 import cv2
 import albumentations as A  # our data augmentation library
 import matplotlib.pyplot as plt
-%matplotlib inline
 import datetime
 import time
 from torchvision.utils import draw_bounding_boxes
