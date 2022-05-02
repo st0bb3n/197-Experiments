@@ -1,5 +1,9 @@
 # ObjectDetection-Drinks
-FasterRCNN with a MobileNetV3-Large FPN backbone
+FasterRCNN with a MobileNetV3-Large FPN backbone. 
+
+# Notebook Version
+
+Some machines experience an sgmllib error (a module deprecated since python 2.6, removed on 3.0). A Notebook is provided as a workaround.
 
 # Requirements
 
