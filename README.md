@@ -1,8 +1,8 @@
 # ObjectDetection-Drinks
 FasterRCNN with a MobileNetV3-Large FPN backbone
 
-# Requirements:
-numpy
+# Requirements
+numpy \n
 pandas
 torch
 torchvision
