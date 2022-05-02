@@ -5,3 +5,5 @@ pandas
 pycocotool
 torch
 torchvision
+wget
+cpython
