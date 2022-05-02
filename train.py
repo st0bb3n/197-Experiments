@@ -101,7 +101,7 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features # we need to c
 model.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(in_features, n_classes)
 
 train_dataset = Drinks(root=dataset_path, transforms=get_transforms(True))
-train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=4, collate_fn=collate_fn)
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=4, collate_fn=utils.collate_fn)
 
 images,targets = next(iter(train_loader))
 images = list(image for image in images)
