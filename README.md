@@ -7,8 +7,7 @@ FasterRCNN with a MobileNetV3-Large FPN backbone.
 
 # Notebook Version
 
-Some machines experience an sgmllib error (a module deprecated since python 2.6, removed on 3.0). A Notebook is provided as a workaround (to be opened on Google Colab). <br>
-
+It is recommended to use the notebook because I've written this using google colab as I have no GPU. <br>
 All of my outputs are generated using google colab including the .pth and evaluation results
 
 # Requirements
@@ -80,3 +79,6 @@ IoU metric: bbox <br>
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.700 <br>
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.822 <br>
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.888 <br>
+ 
+ # References and Acknowledgement
+ The code is inspired by sample codes from documentation, codes from Kaggle, and Dr. Atienza's Deep Learning Experiments.
