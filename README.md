@@ -8,7 +8,7 @@ pip install -r requirements.txt
 ```
 
 # Dataset
-Drinks data set in COCO format is used. Data set have a 80/10/10 split.
+Drinks data set in COCO format is used. Data set have a 90/5/5 split.
 
 # Demo
 
