@@ -1,0 +1,9 @@
+panda
+pycocotools
+albumentations==0.4.6
+transforms
+torch
+torchvision
+cv2
+matplotlib
+numpy
