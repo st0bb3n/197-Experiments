@@ -21,6 +21,13 @@ from pycocotools.coco import COCO
 from albumentations.pytorch import ToTensorV2
 from engine import evaluate, train_one_epoch
 import utils
+import wget
+import shutil
+
+url = "https://github.com/st0bb3n/ObjectDetection-Drinks/releases/download/Dataset/drinkscoco.zip"
+x = wget.download(url, "data.zip")
+
+shutil.unpack_archive("data.zip","drinkscoco")
 
 def get_transforms(train=False):
     if train:
