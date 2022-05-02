@@ -112,7 +112,7 @@ data_loader_test = torch.utils.data.DataLoader(
         test_dataset, batch_size=1, shuffle=False, num_workers=2,
         collate_fn=utils.collate_fn)
 
-num_epochs=2
+num_epochs=10
 
 for epoch in range(num_epochs):
     train_one_epoch(model, optimizer, train_loader, device, epoch, print_freq=50)
