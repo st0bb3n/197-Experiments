@@ -3,12 +3,16 @@ FasterRCNN with a MobileNetV3-Large FPN backbone
 
 # Requirements
 
+To install requirements
 ```bash
 pip install -r requirements.txt
 ```
 
 # Dataset
-Drinks data set in COCO format is used. Data set have a 90/5/5 split.
+Drinks data set in COCO format is used. Data set have a 90/5/5 split. Dataset can be changed by changing 
+```python
+dataset_path = path/to/dataset/folder
+```
 
 # Demo
 
