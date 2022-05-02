@@ -1,3 +1,7 @@
+# 
+Steve Esguerra
+2019-05959
+
 # ObjectDetection-Drinks
 FasterRCNN with a MobileNetV3-Large FPN backbone. 
 
