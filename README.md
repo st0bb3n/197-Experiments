@@ -20,7 +20,7 @@ dataset_path = path/to/dataset/folder
 
 # Demo
 
-![image](https://user-images.githubusercontent.com/52521318/166231284-2706c11c-e05f-4462-98ad-9c20d7f299bc.png)
+![image](https://user-images.githubusercontent.com/52521318/166323171-c317cc2a-7710-4611-9553-579da857dc1a.png)
 
 # Model Evaualation
 
