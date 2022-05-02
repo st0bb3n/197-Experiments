@@ -7,7 +7,9 @@ FasterRCNN with a MobileNetV3-Large FPN backbone.
 
 # Notebook Version
 
-Some machines experience an sgmllib error (a module deprecated since python 2.6, removed on 3.0). A Notebook is provided as a workaround (to be opened on Google Colab). All outputs are generated using google colab
+Some machines experience an sgmllib error (a module deprecated since python 2.6, removed on 3.0). <br>
+
+A Notebook is provided as a workaround (to be opened on Google Colab). All of my outputs are generated using google colab.
 
 # Requirements
 
