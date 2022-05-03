@@ -27,6 +27,9 @@ x = wget.download(url, "data.zip")
 
 shutil.unpack_archive("data.zip","drinkscoco")
 
+url = "https://github.com/st0bb3n/ObjectDetection-Drinks/releases/download/Dataset/trainedmodel.pth"
+x = wget.download(url, "trainedmodel.pth")
+
 class Drinks(datasets.VisionDataset):
     def __init__(self, root, split='train', transform=None, target_transform=None, transforms=None):
         # the 3 transform parameters are required for datasets.VisionDataset
