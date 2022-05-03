@@ -90,11 +90,12 @@ model.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(i
 train_dataset = Drinks(root=dataset_path, transforms=torchvision.transforms.ToTensor())
 train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=2, collate_fn=utils.collate_fn)
 
-images,targets = next(iter(train_loader))
-images = list(image for image in images)
-targets = [{k:v for k, v in t.items()} for t in targets]
+#images,targets = next(iter(train_loader))
+#images = list(image for image in images)
+#targets = [{k:v for k, v in t.items()} for t in targets]
 #output = model(images, targets)
-output = model(images, targets)
+#output = model(images, targets)
+
 device = torch.device("cuda") # use GPU to train
 model = model.to(device)
 
