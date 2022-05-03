@@ -87,16 +87,18 @@ model = torchvision.models.detection.fasterrcnn_mobilenet_v3_large_320_fpn(pretr
 in_features = model.roi_heads.box_predictor.cls_score.in_features
 model.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(in_features, n_classes)
 
-train_dataset = Drinks(root=dataset_path, transforms=torchvision.transforms.ToTensor())
-train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=2, collate_fn=utils.collate_fn)
-
-images,targets = next(iter(train_loader))
-images = list(image for image in images)
-targets = [{k:v for k, v in t.items()} for t in targets]
-output = model(images, targets)
+model.load_state_dict(torch.load("trainedmodel.pth"))
 
 device = torch.device("cuda")
 model = model.to(device)
+
+train_dataset = Drinks(root=dataset_path, transforms=torchvision.transforms.ToTensor())
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, num_workers=2, collate_fn=utils.collate_fn)
+
+#images,targets = next(iter(train_loader))
+#images = list(image for image in images)
+#targets = [{k:v for k, v in t.items()} for t in targets]
+#output = model(images, targets)
 
 params = [p for p in model.parameters() if p.requires_grad]
 optimizer = torch.optim.SGD(params, lr=0.01, momentum=0.9, nesterov=True, weight_decay=1e-4)
