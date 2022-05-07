@@ -27,10 +27,6 @@ dataset_path = path/to/dataset/folder
 
 ![image](https://user-images.githubusercontent.com/52521318/166323171-c317cc2a-7710-4611-9553-579da857dc1a.png)
 
-# Unlabeled Video
-
-https://drive.google.com/file/d/1FYu5vqPizTrKU513r4GmI1ft3wxHMJGV/view
-
 # Labeled Video
 
 https://drive.google.com/file/d/1oWbnqIOBHS4m-vu3aSMapeOJho90dN0D/view
