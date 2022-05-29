@@ -1,8 +1,0 @@
-matplotlib
-numpy
-pandas
-pycocotool
-torch
-torchvision
-wget
-cpython
