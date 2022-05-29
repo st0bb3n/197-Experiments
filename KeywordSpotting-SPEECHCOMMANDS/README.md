@@ -41,36 +41,44 @@ https://drive.google.com/file/d/1oWbnqIOBHS4m-vu3aSMapeOJho90dN0D/view
 0         Non-trainable params
 651 K     Total params
 1.304     Total estimated model params size (MB)
-Sanity Checking: 0it [00:00, ?it/s]/home/esguerra_s/.local/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:487: 
-Epoch 0: 100%|████████████████| 3115/3115 [02:22<00:00, 21.79it/s, loss=2.06, v_num=14, test_loss=1.430, test_acc=64.00]Epoch 0, global step 2803: 'test_acc' reached 64.04109 (best 64.04109), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 1: 100%|████████████████| 3115/3115 [02:22<00:00, 21.80it/s, loss=1.06, v_num=14, test_loss=0.826, test_acc=76.30]Epoch 1, global step 5606: 'test_acc' reached 76.30485 (best 76.30485), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 2: 100%|███████████████| 3115/3115 [02:23<00:00, 21.77it/s, loss=0.741, v_num=14, test_loss=0.779, test_acc=77.50]Epoch 2, global step 8409: 'test_acc' reached 77.45669 (best 77.45669), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 3: 100%|███████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.719, v_num=14, test_loss=0.666, test_acc=81.40]Epoch 3, global step 11212: 'test_acc' reached 81.42407 (best 81.42407), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 4: 100%|███████████████| 3115/3115 [02:23<00:00, 21.78it/s, loss=0.712, v_num=14, test_loss=0.688, test_acc=81.10]Epoch 4, global step 14015: 'test_acc' was not in top 1
-Epoch 5: 100%|███████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.778, v_num=14, test_loss=0.903, test_acc=76.80]Epoch 5, global step 16818: 'test_acc' was not in top 1
-Epoch 6: 100%|███████████████| 3115/3115 [02:23<00:00, 21.77it/s, loss=0.653, v_num=14, test_loss=0.574, test_acc=84.50]Epoch 6, global step 19621: 'test_acc' reached 84.47205 (best 84.47205), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 7: 100%|████████████████| 3115/3115 [02:22<00:00, 21.79it/s, loss=7.24, v_num=14, test_loss=8.930, test_acc=54.30]Epoch 7, global step 22424: 'test_acc' was not in top 1
-Epoch 8: 100%|████████████████| 3115/3115 [02:23<00:00, 21.76it/s, loss=1.67, v_num=14, test_loss=2.170, test_acc=73.40]Epoch 8, global step 25227: 'test_acc' was not in top 1
-Epoch 9: 100%|████████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=2.02, v_num=14, test_loss=3.100, test_acc=64.20]Epoch 9, global step 28030: 'test_acc' was not in top 1
-Epoch 10: 100%|██████████████| 3115/3115 [02:23<00:00, 21.73it/s, loss=0.387, v_num=14, test_loss=0.491, test_acc=87.10]Epoch 10, global step 30833: 'test_acc' reached 87.08520 (best 87.08520), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 11: 100%|██████████████| 3115/3115 [02:23<00:00, 21.76it/s, loss=0.569, v_num=14, test_loss=0.640, test_acc=82.10]Epoch 11, global step 33636: 'test_acc' was not in top 1
-Epoch 12: 100%|██████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.728, v_num=14, test_loss=0.855, test_acc=81.80]Epoch 12, global step 36439: 'test_acc' was not in top 1
-Epoch 13: 100%|██████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.483, v_num=14, test_loss=0.509, test_acc=86.70]Epoch 13, global step 39242: 'test_acc' was not in top 1
-Epoch 14: 100%|██████████████| 3115/3115 [02:23<00:00, 21.76it/s, loss=0.378, v_num=14, test_loss=0.691, test_acc=82.60]Epoch 14, global step 42045: 'test_acc' was not in top 1
-Epoch 15: 100%|███████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.31, v_num=14, test_loss=0.536, test_acc=86.60]Epoch 15, global step 44848: 'test_acc' was not in top 1
-Epoch 16: 100%|██████████████| 3115/3115 [02:23<00:00, 21.73it/s, loss=0.306, v_num=14, test_loss=0.552, test_acc=86.20]Epoch 16, global step 47651: 'test_acc' was not in top 1
-Epoch 17: 100%|██████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.273, v_num=14, test_loss=0.509, test_acc=87.50]Epoch 17, global step 50454: 'test_acc' reached 87.45786 (best 87.45786), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 18: 100%|██████████████| 3115/3115 [02:23<00:00, 21.75it/s, loss=0.267, v_num=14, test_loss=0.497, test_acc=87.60]Epoch 18, global step 53257: 'test_acc' reached 87.64816 (best 87.64816), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 19: 100%|██████████████| 3115/3115 [02:23<00:00, 21.78it/s, loss=0.246, v_num=14, test_loss=0.512, test_acc=87.30]
-Epoch 19, global step 56060: 'test_acc' was not in top 1
-Epoch 19: 100%|██████████████| 3115/3115 [02:23<00:00, 21.78it/s, loss=0.246, v_num=14, test_loss=0.512, test_acc=87.30]
-LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
-Testing DataLoader 0: 100%|███████████████████████████████████████████████████████████| 344/344 [00:05<00:00, 68.47it/s]
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-       Test metric             DataLoader 0
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-        test_acc             85.00713348388672
-        test_loss            0.580515444278717
+Sanity Checking: 0it [00:00, ?it/s]/home/esguerra_s/.local/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:487: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+Epoch 0: 100%|████████████████| 1558/1558 [01:13<00:00, 21.21it/s, loss=1.22, v_num=21, test_loss=1.140, test_acc=66.70]Epoch 0, global step 1402: 'test_acc' reached 66.71741 (best 66.71741), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 1: 100%|███████████████| 1558/1558 [01:13<00:00, 21.17it/s, loss=0.905, v_num=21, test_loss=0.752, test_acc=77.60]Epoch 1, global step 2804: 'test_acc' reached 77.60828 (best 77.60828), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 2: 100%|███████████████| 1558/1558 [01:13<00:00, 21.20it/s, loss=0.775, v_num=21, test_loss=0.625, test_acc=82.00]Epoch 2, global step 4206: 'test_acc' reached 81.95523 (best 81.95523), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 3: 100%|███████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.675, v_num=21, test_loss=0.595, test_acc=82.40]Epoch 3, global step 5608: 'test_acc' reached 82.44404 (best 82.44404), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 4: 100%|███████████████| 1558/1558 [01:13<00:00, 21.19it/s, loss=0.865, v_num=21, test_loss=0.735, test_acc=81.00]Epoch 4, global step 7010: 'test_acc' was not in top 1
+Epoch 5: 100%|████████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.56, v_num=21, test_loss=0.541, test_acc=84.10]Epoch 5, global step 8412: 'test_acc' reached 84.11163 (best 84.11163), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 6: 100%|███████████████| 1558/1558 [01:13<00:00, 21.14it/s, loss=0.625, v_num=21, test_loss=0.520, test_acc=85.10]Epoch 6, global step 9814: 'test_acc' reached 85.06068 (best 85.06068), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 7: 100%|███████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.681, v_num=21, test_loss=0.682, test_acc=82.70]Epoch 7, global step 11216: 'test_acc' was not in top 1
+Epoch 8: 100%|███████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.476, v_num=21, test_loss=0.525, test_acc=85.20]Epoch 8, global step 12618: 'test_acc' reached 85.18942 (best 85.18942), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 9: 100%|███████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.626, v_num=21, test_loss=0.607, test_acc=83.70]Epoch 9, global step 14020: 'test_acc' was not in top 1
+Epoch 10: 100%|██████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.583, v_num=21, test_loss=0.649, test_acc=83.50]Epoch 10, global step 15422: 'test_acc' was not in top 1
+Epoch 11: 100%|██████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.383, v_num=21, test_loss=0.544, test_acc=85.60]Epoch 11, global step 16824: 'test_acc' reached 85.63358 (best 85.63358), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 12: 100%|██████████████| 1558/1558 [01:13<00:00, 21.14it/s, loss=0.458, v_num=21, test_loss=0.787, test_acc=80.20]Epoch 12, global step 18226: 'test_acc' was not in top 1
+Epoch 13: 100%|███████████████| 1558/1558 [01:13<00:00, 21.17it/s, loss=45.1, v_num=21, test_loss=3.900, test_acc=71.90]Epoch 13, global step 19628: 'test_acc' was not in top 1
+Epoch 14: 100%|███████████████| 1558/1558 [01:13<00:00, 21.13it/s, loss=0.26, v_num=21, test_loss=0.546, test_acc=85.50]Epoch 14, global step 21030: 'test_acc' was not in top 1
+Epoch 15: 100%|██████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.275, v_num=21, test_loss=0.499, test_acc=87.10]Epoch 15, global step 22432: 'test_acc' reached 87.11545 (best 87.11545), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 16: 100%|██████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.263, v_num=21, test_loss=0.531, test_acc=86.50]Epoch 16, global step 23834: 'test_acc' was not in top 1
+Epoch 17: 100%|██████████████| 1558/1558 [01:13<00:00, 21.14it/s, loss=0.262, v_num=21, test_loss=0.532, test_acc=86.60]Epoch 17, global step 25236: 'test_acc' was not in top 1
+Epoch 18: 100%|██████████████| 1558/1558 [01:13<00:00, 21.13it/s, loss=0.276, v_num=21, test_loss=0.591, test_acc=84.70]Epoch 18, global step 26638: 'test_acc' was not in top 1
+Epoch 19: 100%|███████████████| 1558/1558 [01:13<00:00, 21.14it/s, loss=0.24, v_num=21, test_loss=0.554, test_acc=85.40]Epoch 19, global step 28040: 'test_acc' was not in top 1
+Epoch 20: 100%|██████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.243, v_num=21, test_loss=0.511, test_acc=87.00]Epoch 20, global step 29442: 'test_acc' was not in top 1
+Epoch 21: 100%|██████████████| 1558/1558 [01:13<00:00, 21.13it/s, loss=0.206, v_num=21, test_loss=0.515, test_acc=86.60]Epoch 21, global step 30844: 'test_acc' was not in top 1
+Epoch 22: 100%|██████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.242, v_num=21, test_loss=0.534, test_acc=85.70]Epoch 22, global step 32246: 'test_acc' was not in top 1
+Epoch 23: 100%|██████████████| 1558/1558 [01:13<00:00, 21.14it/s, loss=0.143, v_num=21, test_loss=0.489, test_acc=87.90]Epoch 23, global step 33648: 'test_acc' reached 87.92429 (best 87.92429), saving model to '/home/esguerra_s/data/speech_commands/checkpoints/resnet18-kws-best-acc.pt-v2.ckpt' as top 1
+Epoch 24: 100%|██████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.219, v_num=21, test_loss=0.536, test_acc=86.10]Epoch 24, global step 35050: 'test_acc' was not in top 1
+Epoch 25: 100%|██████████████| 1558/1558 [01:13<00:00, 21.17it/s, loss=0.134, v_num=21, test_loss=0.515, test_acc=86.70]Epoch 25, global step 36452: 'test_acc' was not in top 1
+Epoch 26: 100%|██████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.173, v_num=21, test_loss=0.527, test_acc=86.20]Epoch 26, global step 37854: 'test_acc' was not in top 1
+Epoch 27: 100%|███████████████| 1558/1558 [01:13<00:00, 21.15it/s, loss=0.14, v_num=21, test_loss=0.530, test_acc=86.20]Epoch 27, global step 39256: 'test_acc' was not in top 1
+Epoch 28: 100%|█████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.0952, v_num=21, test_loss=0.525, test_acc=86.40]Epoch 28, global step 40658: 'test_acc' was not in top 1
+Epoch 29: 100%|███████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.15, v_num=21, test_loss=0.534, test_acc=86.00]Epoch 29, global step 42060: 'test_acc' was not in top 1
+Epoch 29: 100%|███████████████| 1558/1558 [01:13<00:00, 21.16it/s, loss=0.15, v_num=21, test_loss=0.534, test_acc=86.00]LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/esguerra_s/.local/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:487: PossibleUserWarning: Your `test_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+Testing DataLoader 0: 100%|███████████████████████████████████████████████████████████| 172/172 [00:03<00:00, 49.19it/s]────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────       Test metric             DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────        test_acc             84.38958740234375
+        test_loss           0.5757566094398499
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
  
