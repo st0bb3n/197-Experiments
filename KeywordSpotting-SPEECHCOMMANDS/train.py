@@ -1,6 +1,3 @@
-import torch
-import torchvision
-
 from argparse import ArgumentParser
 from pytorch_lightning import LightningModule, Trainer, LightningDataModule
 from torch.optim import Adam
@@ -16,7 +13,6 @@ import matplotlib.pyplot as plt
 import librosa
 import argparse
 import numpy as np
-import wandb
 from pytorch_lightning import LightningModule, Trainer, LightningDataModule, Callback
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
@@ -24,6 +20,7 @@ from torchmetrics.functional import accuracy
 from torchvision.transforms import ToTensor
 from torchaudio.datasets import SPEECHCOMMANDS
 from torchaudio.datasets.speechcommands import load_speechcommands_item
+
 
 class Attention(nn.Module):
     def __init__(self, dim, num_heads=8, qkv_bias=False):
@@ -134,74 +131,11 @@ class UnknownDataset(SPEECHCOMMANDS):
         return waveform, sample_rate, "unknown", speaker_id, utterance_number
 
     def __len__(self):
-        return self.len
-
-class KWSTransformer(LightningModule):
-    def __init__(self, num_classes=37, lr=0.001, max_epochs=30, depth=8, embed_dim=64,
-                 head=4, patch_dim=256, seqlen=16, **kwargs): 
-        super().__init__()
-        self.save_hyperparameters()
-        self.encoder = Transformer(dim=embed_dim, num_heads=head, num_blocks=depth, mlp_ratio=4.,
-                                   qkv_bias=False, act_layer=nn.GELU, norm_layer=nn.LayerNorm)
-        self.embed = torch.nn.Linear(patch_dim, embed_dim)
-
-        self.fc = nn.Linear(seqlen * embed_dim, num_classes)
-        self.loss = torch.nn.CrossEntropyLoss()
-        
-        self.reset_parameters()
-
-
-    def reset_parameters(self):
-        init_weights_vit_timm(self)
-    
-
-    def forward(self, x):
-        # Linear projection
-        x = self.embed(x)
-            
-        # Encoder
-        x = self.encoder(x)
-        x = x.flatten(start_dim=1)
-
-        # Classification head
-        x = self.fc(x)
-        return x
-    
-    def configure_optimizers(self):
-        optimizer = Adam(self.parameters(), lr=self.hparams.lr)
-        # this decays the learning rate to 0 after max_epochs using cosine annealing
-        scheduler = CosineAnnealingLR(optimizer, T_max=self.hparams.max_epochs)
-        return [optimizer], [scheduler]
-
-    def training_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        loss = self.loss(y_hat, y)
-        return loss
-    
-
-    def test_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        loss = self.loss(y_hat, y)
-        acc = accuracy(y_hat, y)
-        return {"y_hat": y_hat, "test_loss": loss, "test_acc": acc}
-
-    def test_epoch_end(self, outputs):
-        avg_loss = torch.stack([x["test_loss"] for x in outputs]).mean()
-        avg_acc = torch.stack([x["test_acc"] for x in outputs]).mean()
-        self.log("test_loss", avg_loss, on_epoch=True, prog_bar=True)
-        self.log("test_acc", avg_acc*100., on_epoch=True, prog_bar=True)
-
-    def validation_step(self, batch, batch_idx):
-        return self.test_step(batch, batch_idx)
-
-    def validation_epoch_end(self, outputs):
-        return self.test_epoch_end(outputs)
+        return self.len   
 
 class KWSDataModule(LightningDataModule):
     def __init__(self, path, batch_size=128, num_workers=6, n_fft=512, 
-                 n_mels=64, win_length=None, hop_length=256, patch_num=4, class_dict={}, 
+                 n_mels=128, win_length=None, hop_length=256, patch_num=4, class_dict={}, 
                  **kwargs):
         super().__init__(**kwargs)
         self.path = path
@@ -289,12 +223,75 @@ class KWSDataModule(LightningDataModule):
             wavs.append(waveform)
 
         mels = torch.stack(mels, dim=0)
-        mels = rearrange(mels, 'b c (p1 h) (p2 w) -> b (p1 p2) (c h w)', p1=self.patch_num, p2=self.patch_num)
+        mels = rearrange(mels, "b c (p1 h) (p2 w) -> b (p1 p2) (c h w)", p1=self.patch_num, p2=self.patch_num)
         labels = torch.stack(labels)
-        labels = torch.LongTensor(labels)
+        # labels = torch.LongTensor(labels)
         wavs = torch.stack(wavs)
    
         return mels, labels
+
+class KWSTransformer(LightningModule):
+    def __init__(self, num_classes=37, lr=0.001, max_epochs=30, depth=16, embed_dim=32,
+                 head=4, patch_dim=256, seqlen=16, **kwargs): 
+        super().__init__()
+        self.save_hyperparameters()
+        self.encoder = Transformer(dim=embed_dim, num_heads=head, num_blocks=depth, mlp_ratio=4.,
+                                   qkv_bias=False, act_layer=nn.GELU, norm_layer=nn.LayerNorm)
+        self.embed = torch.nn.Linear(patch_dim, embed_dim)
+
+        self.fc = nn.Linear(seqlen * embed_dim, num_classes)
+        self.loss = torch.nn.CrossEntropyLoss()
+        
+        self.reset_parameters()
+
+
+    def reset_parameters(self):
+        init_weights_vit_timm(self)
+    
+
+    def forward(self, x):
+        # Linear projection
+        x = self.embed(x)
+            
+        # Encoder
+        x = self.encoder(x)
+        x = x.flatten(start_dim=1)
+
+        # Classification head
+        x = self.fc(x)
+        return x
+    
+    def configure_optimizers(self):
+        optimizer = Adam(self.parameters(), lr=self.hparams.lr)
+        # this decays the learning rate to 0 after max_epochs using cosine annealing
+        scheduler = CosineAnnealingLR(optimizer, T_max=self.hparams.max_epochs)
+        return [optimizer], [scheduler]
+
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        loss = self.loss(y_hat, y)
+        return loss
+    
+
+    def test_step(self, batch, batch_idx):
+        x, y = batch
+        y_hat = self(x)
+        loss = self.loss(y_hat, y)
+        acc = accuracy(y_hat, y)
+        return {"y_hat": y_hat, "test_loss": loss, "test_acc": acc}
+
+    def test_epoch_end(self, outputs):
+        avg_loss = torch.stack([x["test_loss"] for x in outputs]).mean()
+        avg_acc = torch.stack([x["test_acc"] for x in outputs]).mean()
+        self.log("test_loss", avg_loss, on_epoch=True, prog_bar=True)
+        self.log("test_acc", avg_acc*100., on_epoch=True, prog_bar=True)
+
+    def validation_step(self, batch, batch_idx):
+        return self.test_step(batch, batch_idx)
+
+    def validation_epoch_end(self, outputs):
+        return self.test_epoch_end(outputs)
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -343,14 +340,14 @@ if __name__ == "__main__":
     if not os.path.exists(args.path):
         os.makedirs(args.path, exist_ok=True)
     
-    datamodule = KWSDataModule(path=args.path,batch_size=64,
-                            patch_num=4, 
-                            num_workers=6,class_dict=CLASS_TO_IDX)
-    datamodule.prepare_data()
+    # datamodule = KWSDataModule(path=args.path,batch_size=64,
+    #                         patch_num=4, 
+    #                         num_workers=6,class_dict=CLASS_TO_IDX)
+    # datamodule.prepare_data()
 
-    data = iter(datamodule.train_dataloader()).next()
-    patch_dim = data[0].shape[-1]
-    seqlen = data[0].shape[-2]
+    # data = iter(datamodule.train_dataloader()).next()
+    # patch_dim = data[0].shape[-1]
+    # seqlen = data[0].shape[-2]
 
     model = KWSTransformer(num_classes=args.num_classes, epochs=args.max_epochs, lr=args.lr)
     print(model)
@@ -379,46 +376,49 @@ if __name__ == "__main__":
                       callbacks=model_checkpoint)
     model.hparams.sample_rate = datamodule.sample_rate
     model.hparams.idx_to_class = idx_to_class
-    trainer.fit(model, datamodule=datamodule)
-    trainer.test(model, datamodule=datamodule)
+    trainer.fit(model, datamodule = datamodule)
+    trainer.test(model, datamodule = datamodule)
 
-    #torch.save(model, os.path.join(args.path, "checkpoints", "testing.pt"))
-
-    # wandb.finish()
-    # trainer.save_checkpoint('../kwscheckpoint.ckpt')
-    
     # https://pytorch-lightning.readthedocs.io/en/stable/common/production_inference.html
 
     model = model.load_from_checkpoint(os.path.join(
-        args.path, "checkpoints", "resnet18-kws-best-acc.ckpt"))
+            args.path, "checkpoints", "resnet18-kws-best-acc.ckpt"))
     model.eval()
     script = model.to_torchscript()
 
     # save for use in production environment
     model_path = os.path.join(args.path, "checkpoints",
-                            "resnet18-kws-best-acc.pt")
+                                "resnet18-kws-best-acc-v1.pt")
     torch.jit.save(script, model_path)
 
-    # list wav files given a folder
+        # list wav files given a folder
     label = CLASSES[2:]
     label = np.random.choice(label)
     path = os.path.join(args.path, "SpeechCommands/speech_commands_v0.02/")
     path = os.path.join(path, label)
     wav_files = [os.path.join(path, f)
                 for f in os.listdir(path) if f.endswith('.wav')]
-    # select random wav file
+        # select random wav file
     wav_file = np.random.choice(wav_files)
     waveform, sample_rate = torchaudio.load(wav_file)
     transform = torchaudio.transforms.MelSpectrogram(sample_rate=sample_rate,
-                                                    n_fft=args.n_fft,
-                                                    win_length=args.win_length,
-                                                    hop_length=args.hop_length,
-                                                    n_mels=args.n_mels,
-                                                    power=2.0)
+                                                        n_fft=args.n_fft,
+                                                        win_length=args.win_length,
+                                                        hop_length=args.hop_length,
+                                                        n_mels=args.n_mels,
+                                                        power=2.0)
+    #for sample in batch:
+                #waveform, sample_rate, label, speaker_id, utterance_number = sample
+                # ensure that all waveforms are 1sec in length; if not pad with zeros
+    if waveform.shape[-1] < sample_rate:
+        waveform = torch.cat([waveform, torch.zeros((1, sample_rate - waveform.shape[-1]))], dim=-1)
+    elif waveform.shape[-1] > sample_rate:
+        waveform = waveform[:,:sample_rate]
 
-    mel = ToTensor()(librosa.power_to_db(
-        transform(waveform).squeeze().numpy(), ref=np.max))
-    mel = mel.unsqueeze(0)
+
+    mels = ToTensor()(librosa.power_to_db(transform(waveform).squeeze().numpy(), ref=np.max))
+    mels = rearrange(mels, "c (p1 h) (p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
+    mel = mels.unsqueeze(0)
     scripted_module = torch.jit.load(model_path)
     pred = torch.argmax(scripted_module(mel), dim=1)
     print(f"Ground Truth: {label}, Prediction: {idx_to_class[pred.item()]}")

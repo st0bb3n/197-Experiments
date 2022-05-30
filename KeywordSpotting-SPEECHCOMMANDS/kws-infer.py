@@ -29,6 +29,7 @@ import sounddevice as sd
 import time
 import validators
 from torchvision.transforms import ToTensor
+from einops import rearrange
 
 
 def get_args():
@@ -39,7 +40,7 @@ def get_args():
     parser.add_argument("--win-length", type=int, default=None)
     parser.add_argument("--hop-length", type=int, default=512)
     parser.add_argument("--wav-file", type=str, default=None)
-    parser.add_argument("--checkpoint", type=str, default="https://github.com/roatienza/Deep-Learning-Experiments/releases/download/models/resnet18-kws-best-acc.pt")
+    parser.add_argument("--checkpoint", type=str, default="resnet18-kws-best-acc-v1.pt")
     parser.add_argument("--gui", default=False, action="store_true")
     parser.add_argument("--rpi", default=False, action="store_true")
     parser.add_argument("--threshold", type=float, default=0.6)
@@ -66,8 +67,11 @@ if __name__ == "__main__":
     else:
         checkpoint = args.checkpoint
 
+    checkpoint = 'resnet18-kws-best-acc-v1.pt'
+
     print("Loading model checkpoint: ", checkpoint)
     scripted_module = torch.jit.load(checkpoint)
+
 
     if args.gui:
         import PySimpleGUI as sg
@@ -144,6 +148,13 @@ if __name__ == "__main__":
         else:
             waveform = torch.from_numpy(waveform).unsqueeze(0)
             mel = ToTensor()(librosa.power_to_db(transform(waveform).squeeze().numpy(), ref=np.max))
+
+        if waveform.shape[-1] < sample_rate:
+            waveform = torch.cat([waveform, torch.zeros((1, sample_rate - waveform.shape[-1]))], dim=-1)
+        elif waveform.shape[-1] > sample_rate:
+            waveform = waveform[:,:sample_rate]
+
+        mel = rearrange(mel, "c (p1 h) (p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
         mel = mel.unsqueeze(0)
         pred = scripted_module(mel)
         pred = torch.functional.F.softmax(pred, dim=1)
