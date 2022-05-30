@@ -298,7 +298,7 @@ def get_args():
     # model training hyperparameters
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                         help='input batch size for training (default: 64)')
-    parser.add_argument('--max-epochs', type=int, default=1, metavar='N',
+    parser.add_argument('--max-epochs', type=int, default=30, metavar='N',
                         help='number of epochs to train (default: 30)')
     parser.add_argument('--lr', type=float, default=0.001, metavar='LR',
                         help='learning rate (default: 0.001)')
@@ -356,7 +356,7 @@ if __name__ == "__main__":
 
     model_checkpoint = ModelCheckpoint(
         dirpath=os.path.join(args.path, "checkpoints"),
-        filename="resnet18-kws-best-acc",
+        filename="checkpoint",
         save_top_k=1,
         verbose=True,
         monitor='test_acc',
@@ -376,13 +376,13 @@ if __name__ == "__main__":
     # https://pytorch-lightning.readthedocs.io/en/stable/common/production_inference.html
 
     model = model.load_from_checkpoint(os.path.join(
-            args.path, "checkpoints", "resnet18-kws-best-acc.ckpt"))
+            args.path, "checkpoints", "checkpoint.ckpt"))
     model.eval()
     script = model.to_torchscript()
 
     # save for use in production environment
     model_path = os.path.join(args.path, "checkpoints",
-                                "resnet18-kws-best-acc-v1.pt")
+                                "checkpoint-torchscript.pt")
     torch.jit.save(script, model_path)
 
         # list wav files given a folder
