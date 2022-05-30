@@ -1,7 +1,7 @@
 einops==0.4.1
 librosa==0.9.1
 matplotlib==3.5.2
-numpy==1.22.4
+numpy
 PySimpleGUI==4.60.1
 pytorch_lightning==1.6.3
 sounddevice==0.4.4
