@@ -296,71 +296,6 @@ class KWSDataModule(LightningDataModule):
    
         return mels, labels
 
-
-# # a lightning data module for cifar 10 dataset
-# class LitCifar10(LightningDataModule):
-#     def __init__(self, batch_size=32, num_workers=32, patch_num=4, **kwargs):
-#         super().__init__()
-#         self.batch_size = batch_size
-#         self.patch_num = patch_num
-#         self.num_workers = num_workers
-
-#     def prepare_data(self):
-#         self.train_set = CIFAR10(root='./data', train=True,
-#                                  download=True, transform=torchvision.transforms.ToTensor())
-#         self.test_set = CIFAR10(root='./data', train=False,
-#                                 download=True, transform=torchvision.transforms.ToTensor())
-
-#     def collate_fn(self, batch):
-#         x, y = zip(*batch)
-#         x = torch.stack(x, dim=0)
-#         y = torch.LongTensor(y)
-        
-#         return x, y
-
-#     def train_dataloader(self):
-#         return torch.utils.data.DataLoader(self.train_set, batch_size=self.batch_size, 
-#                                         shuffle=True, collate_fn=self.collate_fn,
-#                                         num_workers=self.num_workers)
-
-#     def test_dataloader(self):
-#         return torch.utils.data.DataLoader(self.test_set, batch_size=self.batch_size, 
-#                                         shuffle=False, collate_fn=self.collate_fn,
-#                                         num_workers=self.num_workers)
-
-#     def val_dataloader(self):
-#         return self.test_dataloader()
-
-
-# class WandbCallback(Callback):
-
-#     def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-#         # log 10 sample audio predictions from the first batch
-#         if batch_idx == 0:
-#             n = 10
-#             mels, labels, wavs = batch
-#             preds = outputs["preds"]
-#             preds = torch.argmax(preds, dim=1)
-
-#             labels = labels.cpu().numpy()
-#             preds = preds.cpu().numpy()
-            
-#             wavs = torch.squeeze(wavs, dim=1)
-#             wavs = [ (wav.cpu().numpy()*32768.0).astype("int16") for wav in wavs]
-            
-#             sample_rate = pl_module.hparams.sample_rate
-#             idx_to_class = pl_module.hparams.idx_to_class
-            
-#             # log audio samples and predictions as a W&B Table
-#             columns = ['audio', 'mel', 'ground truth', 'prediction']
-#             data = [[wandb.Audio(wav, sample_rate=sample_rate), wandb.Image(mel), idx_to_class[label], idx_to_class[pred]] for wav, mel, label, pred in list(
-#                 zip(wavs[:n], mels[:n], labels[:n], preds[:n]))]
-#             wandb_logger.log_table(
-#                 key='ResNet18 on KWS using PyTorch Lightning',
-#                 columns=columns,
-#                 data=data)
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     # model training hyperparameters
@@ -393,28 +328,6 @@ def get_args():
 
     args = parser.parse_args("")
     return args
-
-# def plot_waveform(waveform, sample_rate, title="Waveform", xlim=None, ylim=None):
-#     waveform = waveform.numpy()
-
-#     num_channels, num_frames = waveform.shape
-#     time_axis = torch.arange(0, num_frames) / sample_rate
-
-#     figure, axes = plt.subplots(num_channels, 1)
-#     if num_channels == 1:
-#         axes = [axes]
-#     for c in range(num_channels):
-#         axes[c].plot(time_axis, waveform[c], linewidth=1)
-#         axes[c].grid(True)
-#         if num_channels > 1:
-#             axes[c].set_ylabel(f'Channel {c+1}')
-#         if xlim:
-#             axes[c].set_xlim(xlim)
-#         if ylim:
-#             axes[c].set_ylim(ylim)
-#     figure.suptitle(title)
-#     plt.show(block=False)
-
 
 if __name__ == "__main__":
 
@@ -475,6 +388,7 @@ if __name__ == "__main__":
     # trainer.save_checkpoint('../kwscheckpoint.ckpt')
     
     # https://pytorch-lightning.readthedocs.io/en/stable/common/production_inference.html
+
     model = model.load_from_checkpoint(os.path.join(
         args.path, "checkpoints", "resnet18-kws-best-acc.ckpt"))
     model.eval()
