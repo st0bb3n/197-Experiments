@@ -12,6 +12,21 @@ To install requirements
 pip install -r requirements.txt
 ```
 
+# To run 
+
+Clone the repository and then run 
+```python
+python3 train.py
+```
+This will automatically download the dataset, train the model, get the most accurate checkpoint, and then convert that checkpoint into torchscript.
+
+To run inferencing mode
+```python
+python3 kws-infer.py --gui
+```
+This will use the most accurate .pt which was already provided
+
+
 # Dataset
 Dataset is downloaded from Torch Audio Datasets
 
