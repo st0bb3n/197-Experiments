@@ -38,7 +38,7 @@ from torchaudio.datasets import SPEECHCOMMANDS
 
 ![image](https://user-images.githubusercontent.com/52521318/171010173-ffbf06e3-d754-46e4-9885-3ad4b83deea9.png)
 
-# Labeled Video
+# Demo Video
 
 [https://drive.google.com/file/d/1oWbnqIOBHS4m-vu3aSMapeOJho90dN0D/view](https://drive.google.com/file/d/1ydyQKPBmYDOYgq3OsWq5yN5BSQ-T1NIn/view?usp=sharing)
 
