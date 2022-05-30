@@ -12,6 +12,21 @@ To install requirements
 pip install -r requirements.txt
 ```
 
+# To run 
+
+Clone the repository and then run 
+```python
+python3 train.py
+```
+This will automatically download the dataset, train the model, get the most accurate checkpoint, and then convert that checkpoint into torchscript.
+
+To run inferencing mode
+```python
+python3 kws-infer.py
+```
+This will use the most accurate .pt which was already provided
+
+
 # Dataset
 Dataset is downloaded from Torch Audio Datasets
 
@@ -21,11 +36,11 @@ from torchaudio.datasets import SPEECHCOMMANDS
 
 # Demo
 
-![image](https://user-images.githubusercontent.com/52521318/166323171-c317cc2a-7710-4611-9553-579da857dc1a.png)
+![image](https://user-images.githubusercontent.com/52521318/171010173-ffbf06e3-d754-46e4-9885-3ad4b83deea9.png)
 
 # Labeled Video
 
-https://drive.google.com/file/d/1oWbnqIOBHS4m-vu3aSMapeOJho90dN0D/view
+[https://drive.google.com/file/d/1oWbnqIOBHS4m-vu3aSMapeOJho90dN0D/view](https://drive.google.com/file/d/1ydyQKPBmYDOYgq3OsWq5yN5BSQ-T1NIn/view?usp=sharing)
 
 # Training Evaluation (Epochs = 20)
 
