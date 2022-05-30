@@ -223,7 +223,7 @@ class KWSDataModule(LightningDataModule):
             wavs.append(waveform)
 
         mels = torch.stack(mels, dim=0)
-        mels = rearrange(mels, "b c (p1 h) (p2 w) -> b (p1 p2) (c h w)", p1=self.patch_num, p2=self.patch_num)
+        mels = rearrange(mels, "b c (h) (p1 p2 w) -> b (p1 p2) (c h w)", p1=self.patch_num, p2=self.patch_num)
         labels = torch.stack(labels)
         # labels = torch.LongTensor(labels)
         wavs = torch.stack(wavs)
@@ -411,7 +411,7 @@ if __name__ == "__main__":
 
 
     mels = ToTensor()(librosa.power_to_db(transform(waveform).squeeze().numpy(), ref=np.max))
-    mels = rearrange(mels, "c (p1 h) (p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
+    mels = rearrange(mels, "c (h) (p1 p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
     mel = mels.unsqueeze(0)
     scripted_module = torch.jit.load(model_path)
     pred = torch.argmax(scripted_module(mel), dim=1)

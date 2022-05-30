@@ -154,7 +154,7 @@ if __name__ == "__main__":
         elif waveform.shape[-1] > sample_rate:
             waveform = waveform[:,:sample_rate]
 
-        mel = rearrange(mel, "c (p1 h) (p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
+        mel = rearrange(mel, "c (h) (p1 p2 w) -> (p1 p2) (c h w)", p1=4, p2=4)
         mel = mel.unsqueeze(0)
         pred = scripted_module(mel)
         pred = torch.functional.F.softmax(pred, dim=1)
