@@ -356,7 +356,7 @@ if __name__ == "__main__":
 
     model_checkpoint = ModelCheckpoint(
         dirpath=os.path.join(args.path, "checkpoints"),
-        filename="checkpoint",
+        filename="train-checkpoint",
         save_top_k=1,
         verbose=True,
         monitor='test_acc',
@@ -382,7 +382,7 @@ if __name__ == "__main__":
 
     # save for use in production environment
     model_path = os.path.join(args.path, "checkpoints",
-                                "checkpoint-torchscript.pt")
+                                "train-checkpoint-torchscript.pt")
     torch.jit.save(script, model_path)
 
         # list wav files given a folder
