@@ -21,7 +21,7 @@ from torchaudio.datasets import SPEECHCOMMANDS
 
 # Demo
 
-![image](https://user-images.githubusercontent.com/52521318/166323171-c317cc2a-7710-4611-9553-579da857dc1a.png)
+![image](https://user-images.githubusercontent.com/52521318/171010173-ffbf06e3-d754-46e4-9885-3ad4b83deea9.png)
 
 # Labeled Video
 
