@@ -67,7 +67,7 @@ if __name__ == "__main__":
     else:
         checkpoint = args.checkpoint
 
-    checkpoint = 'checkpoint-torchscript.pt' #85.98315 accuracy
+    checkpoint = 'checkpoint-torchscript.pt'
 
     print("Loading model checkpoint: ", checkpoint)
     scripted_module = torch.jit.load(checkpoint)
