@@ -10,5 +10,3 @@ torchaudio
 torchmetrics
 torchvision
 validators
-libportaudio2
-libasound-dev
