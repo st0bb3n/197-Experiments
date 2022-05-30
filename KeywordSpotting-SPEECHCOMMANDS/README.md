@@ -22,7 +22,11 @@ This will automatically download the dataset, train the model, get the most accu
 
 To run inferencing mode
 ```python
+<<<<<<< HEAD
 python3 kws-infer.py
+=======
+python3 kws-infer.py --gui
+>>>>>>> 9c7df7a8ba8daf69f9e125156363688118920198
 ```
 This will use the most accurate .pt which was already provided
 
