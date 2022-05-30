@@ -328,6 +328,8 @@ def get_args():
 
 if __name__ == "__main__":
 
+    torch.cuda.empty_cache()
+
     args = get_args()
     CLASSES = ['silence', 'unknown', 'backward', 'bed', 'bird', 'cat', 'dog', 'down', 'eight', 'five', 'follow',
                'forward', 'four', 'go', 'happy', 'house', 'learn', 'left', 'marvin', 'nine', 'no',
@@ -340,14 +342,6 @@ if __name__ == "__main__":
     if not os.path.exists(args.path):
         os.makedirs(args.path, exist_ok=True)
     
-    # datamodule = KWSDataModule(path=args.path,batch_size=64,
-    #                         patch_num=4, 
-    #                         num_workers=6,class_dict=CLASS_TO_IDX)
-    # datamodule.prepare_data()
-
-    # data = iter(datamodule.train_dataloader()).next()
-    # patch_dim = data[0].shape[-1]
-    # seqlen = data[0].shape[-2]
 
     model = KWSTransformer(num_classes=args.num_classes, epochs=args.max_epochs, lr=args.lr)
     print(model)
