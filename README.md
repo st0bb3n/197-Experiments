@@ -45,14 +45,6 @@ from torchaudio.datasets import SPEECHCOMMANDS
 # Training Evaluation (Epochs = 15)
 
 ```
-Using 16bit native Automatic Mixed Precision (AMP)
-GPU available: True, used: True
-TPU available: False, using: 0 TPU cores
-IPU available: False, using: 0 IPUs
-HPU available: False, using: 0 HPUs
-Missing logger folder: /content/lightning_logs
-LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
-
   | Name    | Type             | Params
 ---------------------------------------------
 0 | encoder | Transformer      | 597 K 
@@ -64,32 +56,43 @@ LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 0         Non-trainable params
 651 K     Total params
 1.304     Total estimated model params size (MB)
-/usr/local/lib/python3.7/dist-packages/torch/utils/data/dataloader.py:490: UserWarning: This DataLoader will create 6 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
-  cpuset_checked))
-/usr/local/lib/python3.7/dist-packages/pytorch_lightning/trainer/connectors/data_connector.py:490: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
-  category=PossibleUserWarning,
-Epoch 9: 100%
-1558/1558 [02:12<00:00, 11.72it/s, loss=0.419, v_num=0, test_loss=0.543, test_acc=86.30]
-Epoch 0, global step 1402: 'test_acc' reached 80.43378 (best 80.43378), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 1, global step 2804: 'test_acc' reached 86.51400 (best 86.51400), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
-Epoch 2, global step 4206: 'test_acc' was not in top 1
-Epoch 3, global step 5608: 'test_acc' reached 89.71765 (best 89.71765), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Sanity Checking DataLoader 0: 100%
+2/2 [00:00<00:00, 7.02it/s]
+Epoch 19: 100%
+1558/1558 [02:11<00:00, 11.86it/s, loss=0.204, v_num=0, test_loss=0.397, test_acc=90.90]
+Validation DataLoader 0: 100%
+156/156 [00:09<00:00, 18.96it/s]
+Epoch 0, global step 1402: 'test_acc' reached 81.72289 (best 81.72289), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Validation DataLoader 0: 100%
+156/156 [00:08<00:00, 20.35it/s]
+Epoch 1, global step 2804: 'test_acc' reached 85.20387 (best 85.20387), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Validation: 0it [00:00, ?it/s]
+Epoch 2, global step 4206: 'test_acc' reached 85.88152 (best 85.88152), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Epoch 3, global step 5608: 'test_acc' reached 89.26840 (best 89.26840), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
 Epoch 4, global step 7010: 'test_acc' was not in top 1
 Epoch 5, global step 8412: 'test_acc' was not in top 1
 Epoch 6, global step 9814: 'test_acc' was not in top 1
-Epoch 7, global step 11216: 'test_acc' was not in top 1
-Epoch 8, global step 12618: 'test_acc' reached 89.92044 (best 89.92044), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Epoch 7, global step 11216: 'test_acc' reached 90.37213 (best 90.37213), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Epoch 8, global step 12618: 'test_acc' was not in top 1
 Epoch 9, global step 14020: 'test_acc' was not in top 1
+Epoch 10, global step 15422: 'test_acc' was not in top 1
+Epoch 11, global step 16824: 'test_acc' was not in top 1
+Epoch 12, global step 18226: 'test_acc' reached 90.47131 (best 90.47131), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Epoch 13, global step 19628: 'test_acc' was not in top 1
+Epoch 14, global step 21030: 'test_acc' was not in top 1
+Epoch 15, global step 22432: 'test_acc' reached 91.62414 (best 91.62414), saving model to '/content/data/speech_commands/checkpoints/resnet18-kws-best-acc.ckpt' as top 1
+Epoch 16, global step 23834: 'test_acc' was not in top 1
+Epoch 17, global step 25236: 'test_acc' was not in top 1
+Epoch 18, global step 26638: 'test_acc' was not in top 1
+Epoch 19, global step 28040: 'test_acc' was not in top 1
 LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
-/usr/local/lib/python3.7/dist-packages/pytorch_lightning/trainer/connectors/data_connector.py:490: PossibleUserWarning: Your `test_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
-  category=PossibleUserWarning,
 Testing DataLoader 0: 100%
-172/172 [00:10<00:00, 18.25it/s]
+172/172 [00:10<00:00, 17.88it/s]
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
        Test metric             DataLoader 0
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-        test_acc             85.76042938232422
-        test_loss           0.5617194771766663
+        test_acc             90.2952880859375
+        test_loss           0.41182997822761536
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
  
